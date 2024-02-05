@@ -72,6 +72,7 @@ this.anims.create({
     frameRate: 10,
     repeat: -1
 });
+
 }
 
 function update ()
