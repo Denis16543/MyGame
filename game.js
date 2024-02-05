@@ -10,7 +10,7 @@ var config = {
 };
 
 var game = new Phaser.Game(config);
-{
+
     function preload ()
 {
     this.load.image('sky', 'assets/sky.png');
@@ -22,12 +22,18 @@ var game = new Phaser.Game(config);
         { frameWidth: 32, frameHeight: 48 }
     );
 }
-}
+
 
 function create ()
 {
     this.add.image(400, 300, 'sky');
     this.add.image(400, 300, 'star');
+    this.add.image(200, 100, 'star');
+    this.add.image(400, 300, 'star');
+    this.add.image(700, 300, 'star');
+    this.add.image(600, 300, 'star');
+    this.add.image(500, 200, 'star');
+    this.add.image(300, 100, 'star');
 }
 
 function update ()
