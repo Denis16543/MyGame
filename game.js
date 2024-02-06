@@ -34,13 +34,6 @@ var game = new Phaser.Game(config);
 function create ()
 {
     this.add.image(400, 300, 'sky');
-    this.add.image(400, 300, 'star');
-    this.add.image(200, 100, 'star');
-    this.add.image(400, 300, 'star');
-    this.add.image(700, 300, 'star');
-    this.add.image(600, 300, 'star');
-    this.add.image(500, 200, 'star');
-    this.add.image(300, 100, 'star');
     platforms = this.physics.add.staticGroup();
 
     platforms.create(400, 568, 'ground').setScale(2).refreshBody();
@@ -74,6 +67,35 @@ this.anims.create({
 });
 this.physics.add.collider(player, platforms);
 cursors = this.input.keyboard.createCursorKeys();
+stars = this.physics.add.group({
+    key: 'star',
+    repeat: 11,
+    setXY: { x: 12, y: 0, stepX: 70 }
+});
+
+stars.children.iterate(function (child) {
+
+    child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+
+});
+this.physics.add.collider(stars, platforms);
+this.physics.add.overlap(player, stars, collectStar, null, this);
+function collectStar (player, star)
+{
+    star.disableBody(true, true);
+}
+var score = 0;
+var scoreText;
+scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+function collectStar (player, star)
+{
+    star.disableBody(true, true);
+
+    score += 10;
+    scoreText.setText('Score: ' + score);
+}
+
+
 
 }
 
@@ -102,4 +124,5 @@ function update ()
     {
         player.setVelocityY(-330);
     }
+   
 }
